@@ -6,7 +6,7 @@ public class Account {
     private String password;
     private String address;
     private String mobilePhone;
-    private int eWalletNumber;
+    private String eWalletNumber;
     private Order[] Orders;
     private LoyalityPoints credits;
 
@@ -58,11 +58,11 @@ public class Account {
         return mobilePhone;
     }
 
-    public void setEWalletNum(int eWalletNumber){
+    public void setEWalletNum(String eWalletNumber){
         this.eWalletNumber = eWalletNumber;
     }
 
-    public int getEWalletNum(){
+    public String getEWalletNum(){
         return eWalletNumber;
     }
 
