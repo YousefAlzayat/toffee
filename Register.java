@@ -21,7 +21,7 @@ public class Register {
         String lN = in.next();
         while(true){
             if(stringValidation(lN)){
-                a.setFName(lN);
+                a.setSName(lN);
                 break;
             }
             System.out.print("Please enter your second name: ");
@@ -65,7 +65,7 @@ public class Register {
             num = in.next();
         }
         //------------------------------------------------
-        System.out.println("Did you have E-Wallet?\n1. YES.\n2.NO");
+        System.out.println("Did you have E-Wallet?\n1. YES.\n2. NO.");
         int ch = in.nextInt();
         if(ch == 1){
             System.out.print("Please, Enter E-Wallet Number: ");
@@ -76,6 +76,7 @@ public class Register {
                     break;
                 }
                 System.out.println("Please, Enter Correct E-Wallet Number: ");
+                ewallet = in.next();
             }
         }else{
             a.setEWalletNum("0");
@@ -90,7 +91,7 @@ public class Register {
         System.out.println("Please follow mail guidelines which are:\n" +
                 "1. Mail must contains lower & upper case letters.\n" +
                 "2. Mail may contains numbers after letters for strong password.\n" +
-                "3. Mail must contains @ following it with the path.\n");
+                "3. Mail must contains @ following it with the path like 'nada123@gmail.com'.\n");
         return false;
     }
     //----------------------------------------------------------------------------------------
@@ -105,8 +106,6 @@ public class Register {
         return false;
     }
     //----------------------------------------------------------------------------------------
-
-
     public boolean checkTelephoneNumberGuidelines(String num){
         if(Pattern.matches("(01)?[0-9]{9}", num)){
             return true;
@@ -124,10 +123,10 @@ public class Register {
     }
     //-----------------------------------------------------------------------------------------
     public boolean EWalletValidation(String word){
-        if(Pattern.matches("[0-9]+", word)){
+        if(Pattern.matches("[0-9]{11}", word)){
             return true;
         }
-        System.out.println("please, Enter only numbers.");
+        System.out.println("please, Enter only 11 number. ");
         return false;
     }
 }
