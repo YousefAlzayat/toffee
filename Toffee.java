@@ -90,7 +90,7 @@ public class Toffee {
                     }else{
                         while(true){
                             System.out.println("This is wrong password for this mail");
-                            System.out.print("You can:\n1. Update Password\n2. Enter password again.\nEnter your choice: ");
+                            System.out.print("You can:\n1. Enter Password Again.\n2. Update Password\nEnter your choice: ");
                             int n = reader.nextInt();
                             if(n == 1){
                                String newPass = l.enterPassword();
