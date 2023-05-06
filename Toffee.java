@@ -32,7 +32,6 @@ public class Toffee {
         }
         return -1;
     }
-
     public String correctPassword(String pass){
         for(int i = 0; i < accounts.size(); i++){
             if(Objects.equals(accounts.get(i).getPassword(), pass)){
@@ -62,17 +61,21 @@ public class Toffee {
                     Register r = new Register();
                     Account a = new Account();
                     r.createAccount(a);
-                    System.out.println("Successfully Created Account.");
-                    accounts.add(a);
-                    System.out.println(a.getFName() + " " + a.getSName());
+                    if(foundedMail(a.getMail()) != -1 && accounts.size() != 0){
+                        System.out.println("This Mail Is Repeated, Each Mail Has Only One Account. Try Again!");
+                    }else {
+                        System.out.println("Successfully Created Account.");
+                        accounts.add(a);
+                        System.out.println(a.getFName() + " " + a.getSName());
 //                    System.out.println(a.getLoyalityPoints());
-                    displayCategories();
+                        displayCategories();
+                    }
                 }
                 case 2 -> {
                     LogIn l = new LogIn();
                     int ch = foundedMail(l.enterMail());
                     while(ch == -1){
-                        System.out.println("InValidMail");
+                        System.out.println("InValid Mail.");
                         ch = foundedMail(l.enterMail());
                         if(ch == -1){
                             System.out.println("Did you want to register instead of logIn?\n1. YES.\n2. NO.");
@@ -84,13 +87,14 @@ public class Toffee {
                         }
                     }
                     if(Objects.equals(correctPassword(l.enterPassword()), accounts.get(ch).getPassword())){
+                        System.out.println("Valid Info ^^");
                         System.out.print(accounts.get(ch).getFName() + " " + accounts.get(ch).getSName());
 //                        System.out.println(accounts.get(ch).getLoyalityPoints());
                         displayCategories();
                     }else{
                         while(true){
                             System.out.println("This is wrong password for this mail");
-                            System.out.print("You can:\n1. Enter Password Again.\n2. Update Password\nEnter your choice: ");
+                            System.out.print("You can:\n1. Enter Password Again.\n2. Update Password.\nEnter your choice: ");
                             int n = reader.nextInt();
                             if(n == 1){
                                String newPass = l.enterPassword();
@@ -102,7 +106,8 @@ public class Toffee {
                                }
                             }else if(n == 2){
                                 accounts.get(ch).updatePassword(l.forgetPassword());
-                                System.out.print(accounts.get(ch).getFName() + " " + accounts.get(ch).getSName());
+                                System.out.println("Valid Info ^^");
+                                System.out.println(accounts.get(ch).getFName() + " " + accounts.get(ch).getSName());
 //                                 System.out.println(accounts.get(ch).getLoyalityPoints());
                                 displayCategories();
                                 break;
@@ -143,6 +148,10 @@ public class Toffee {
         System.out.println("Body: ");
         System.out.println("\nPlease enter this number in the program: " + tempOTP + "\n");
     }
-
+    public void displayAccounts(){
+        for(int i = 0; i < accounts.size(); i++){
+            System.out.println(accounts.get(i));
+        }
+    }
 }
 
