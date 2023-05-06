@@ -5,6 +5,7 @@ public class Register {
     Scanner in = new Scanner(System.in);
     public void createAccount(Account a){
         System.out.print("Please enter your first name: ");
+//        a.setFName(in.next());
         String fN = in.next();
         while(true){
             if(stringValidation(fN)){
@@ -16,6 +17,7 @@ public class Register {
         }
         //-------------------------------------------------
         System.out.print("Please enter you second name: ");
+//        a.setSName(in.next());
         String lN = in.next();
         while(true){
             if(stringValidation(lN)){
@@ -82,7 +84,7 @@ public class Register {
     //=----------------------------------------------------------------------------------------=
 
     public boolean validMail(String Email){
-        if(Pattern.matches("[A-Za-z]+[1-9]*@{1}[a-z]+.[a-z]+", Email)){
+        if(Pattern.matches("[A-Za-z]+[1-9]*@{1}[a-z]+[.]{1}[a-z]+", Email)){
             return true;
         }
         System.out.println("Please follow mail guidelines which are:\n" +
@@ -98,7 +100,7 @@ public class Register {
         }
         System.out.println("1. Password must contain from 8 to 14 characters.\n" +
                 "2. Each password must contain upper and lower case characters.\n" +
-                "3. Each password must contain unique numbers.\n" +
+                "3. Each password must contain numbers.\n" +
                 "4. Each password must contain special characters into it.");
         return false;
     }
@@ -114,7 +116,7 @@ public class Register {
     }
     //----------------------------------------------------------------------------------------
     public boolean stringValidation(String word){
-        if(Pattern.matches("[A-Za-z]", word)){
+        if(Pattern.matches("[A-Za-z]+", word)){
             return true;
         }
         System.out.println("please, Enter only characters.");
