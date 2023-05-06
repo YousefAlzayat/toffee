@@ -124,7 +124,7 @@ public class Register {
     }
     //-----------------------------------------------------------------------------------------
     public boolean EWalletValidation(String word){
-        if(Pattern.matches("[0-9]", word)){
+        if(Pattern.matches("[0-9]+", word)){
             return true;
         }
         System.out.println("please, Enter only numbers.");
