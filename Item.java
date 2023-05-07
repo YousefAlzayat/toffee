@@ -20,7 +20,7 @@ public class Item {
         this.categoryName = "";
     }
 
-    public Item(String name, int price, String des, int amount, String bName, String discount, String CName, Admin a) {
+    public Item(String name, int price, String des, int amount, String bName, String discount, String CName) {
         this.name = name;
         this.price = price;
         this.description = des;
@@ -58,9 +58,8 @@ public class Item {
     public int getPrice(){
         return this.price;
     }
-    public void setAvailableAmount(){
-        System.out.print("Please enter the available amount: ");
-        this.availableAmount = in.nextInt();
+    public void setAvailableAmount(int amount){
+        this.availableAmount = amount;
     }
     public int getAvailableAmount(){
         return this.availableAmount;

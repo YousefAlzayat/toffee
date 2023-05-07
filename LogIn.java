@@ -7,12 +7,12 @@ public class LogIn {
     String m;
     public String enterMail(){
         System.out.print("Please Enter Your Mail: ");
-        m = in.next();
+        m = in.nextLine();
         return m;
     }
     public String enterPassword(){
         System.out.print("Please Enter Your Password: ");
-        return in.next();
+        return in.nextLine();
     }
     public boolean checkPasswordGuidelines(String pass){
         if(Pattern.matches("(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@#!+^%$&*.<>;{})(]).{8,}", pass)){
@@ -26,11 +26,11 @@ public class LogIn {
     }
     public String forgetPassword(){
         System.out.print("Please enter new password again: ");
-        String m = in.next();
+        String m = in.nextLine();
         while(true) {
             if (!checkPasswordGuidelines(m)) {
                 System.out.print("Please enter another password: ");
-                m = in.next();
+                m = in.nextLine();
             }else{
                 return m;
             }

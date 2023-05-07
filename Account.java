@@ -1,3 +1,5 @@
+import java.util.Vector;
+
 public class Account {
     
     private String firstName;
@@ -7,8 +9,21 @@ public class Account {
     private String address;
     private String mobilePhone;
     private String eWalletNumber;
-    private Order[] Orders;
+    private Vector<Order> Orders = new Vector<Order>();
     private LoyalityPoints credits;
+    private Order cart;
+
+    Account(){}
+
+    Account(String firstName, String secondName, String mail, String password, String address, String mobilePhone, String eWalletNumber){
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.mail = mail;
+        this.password = password;
+        this.address = address;
+        this.mobilePhone = mobilePhone;
+        this.eWalletNumber = eWalletNumber;
+    }
 
     public void setFName(String firstName){
         this.firstName = firstName;
@@ -74,12 +89,19 @@ public class Account {
 
     // }
 
-    // public void displayOrderHistory(){
+    public void displayOrderHistory(){
 
-    // }
+    }
 
-    // public void addToCart(Item item){
+    public void addToCart(Item item, int amount){
+        if(cart == null) cart = new Order(this, Orders.size());
 
-    // }
+        cart.addItem(item, amount);
+
+    }
+
+    public void updatePassword(String newPassword){
+        this.password = newPassword;
+    }
 
 }

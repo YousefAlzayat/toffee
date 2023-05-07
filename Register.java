@@ -85,7 +85,7 @@ public class Register {
     //=----------------------------------------------------------------------------------------=
 
     public boolean validMail(String Email){
-        if(Pattern.matches("[a-zA-Z0-9()+-_.;,*&^%$#@!]+@{1}[a-zA-Z]+[.]{1}[a-zA-Z]+", Email)){
+        if(Pattern.matches("[A-Za-z]+[0-9]*@{1}[a-z]+[.]{1}[a-z]+", Email)){
             return true;
         }
         System.out.println("Please follow mail guidelines which are:\n" +
@@ -110,7 +110,7 @@ public class Register {
         if(Pattern.matches("(01)?[0-9]{9}", num)){
             return true;
         }
-        System.out.println("Mobile contains only numbers.");
+        System.out.println("Mobile contains only numbers and is 11 numbers long.");
         return false;
     }
     //----------------------------------------------------------------------------------------
