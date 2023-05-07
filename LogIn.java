@@ -15,7 +15,7 @@ public class LogIn {
         return in.next();
     }
     public boolean checkPasswordGuidelines(String pass){
-        if(Pattern.matches("(?=.*[a-zA-z])(?=.*[0-9])(?=.*[@#!+^%$&*]).{8,14}", pass)){
+        if(Pattern.matches("(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@#!+^%$&*.<>;{})(]).{8,}", pass)){
             return true;
         }
         System.out.println("1. Password must contain from 8 to 14 characters.\n" +
