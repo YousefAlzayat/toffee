@@ -85,7 +85,7 @@ public class Register {
     //=----------------------------------------------------------------------------------------=
 
     public boolean validMail(String Email){
-        if(Pattern.matches("[A-Za-z]+[1-9]*@{1}[a-z]+[.]{1}[a-z]+", Email)){
+        if(Pattern.matches("[a-zA-Z0-9()+-_.;,*&^%$#@!]+@{1}[a-zA-Z]+[.]{1}[a-zA-Z]+", Email)){
             return true;
         }
         System.out.println("Please follow mail guidelines which are:\n" +
@@ -96,7 +96,7 @@ public class Register {
     }
     //----------------------------------------------------------------------------------------
     public boolean checkPasswordGuidelines(String s){
-        if(Pattern.matches("(?=.*[a-zA-z])(?=.*[0-9])(?=.*[@#!+^%$&*]).{8,14}", s)){
+        if(Pattern.matches("(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@#!+^%$&*.<>;{})(]).{8,}", s)){
             return true;
         }
         System.out.println("1. Password must contain from 8 to 14 characters.\n" +
