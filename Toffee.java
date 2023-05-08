@@ -217,6 +217,8 @@ public class Toffee {
                 }
             }
         }
+        displayCategories();
+
         // reader.close();
     }
 
