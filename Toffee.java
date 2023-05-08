@@ -28,7 +28,7 @@ public class Toffee {
         while(true){
             System.out.print("\033[H\033[2J");
             System.out.println("Please enter the category you would like to explore of the following: ");
-            
+
             for (int i = 0; i < categories.size(); i++) {
                 System.out.println("(" + (i+1) + ")" + " " + categories.get(i).getName());
             }
@@ -41,7 +41,7 @@ public class Toffee {
         }
 
         int choice = Integer.parseInt(temp);
-        
+
         if(choice == categories.size()+2){
             int choice2=-1;
             while(true){
@@ -53,14 +53,14 @@ public class Toffee {
                 else System.out.println("(2) Go to Checkout");
                 System.out.println();
                 System.out.print("Choice: ");
-                
+
                 String temp2 = reader.nextLine();
-                if(Pattern.matches("[1-2]", temp2) && (!loggedAccount.cartEmpty() || Pattern.matches("[1]", temp2))){ 
+                if(Pattern.matches("[1-2]", temp2) && (!loggedAccount.cartEmpty() || Pattern.matches("[1]", temp2))){
                     choice2 = Integer.parseInt(temp2);
                     break;
                 }
             }
-            
+
             if(choice2==2){
                 while(true){
                     System.out.print("\033[H\033[2J");
@@ -87,7 +87,7 @@ public class Toffee {
                 return;
             }
 
-        }  
+        }
 
         else if(choice <= categories.size()) {
             while(true){
@@ -104,24 +104,23 @@ public class Toffee {
                 System.out.print("Choice: ");
 
                 temp = reader.nextLine();
-                if(Pattern.matches("[1-9]+", temp) && ((loggedAccount != null && Integer.parseInt(temp) < categories.get(choice-1).items.size()+1 && Integer.parseInt(temp) > 0) || 
-                    Integer.parseInt(temp) == categories.get(choice-1).items.size()+1)) break;
+                if(Pattern.matches("[1-9]+", temp) && ((loggedAccount != null && Integer.parseInt(temp) < categories.get(choice-1).items.size()+1 && Integer.parseInt(temp) > 0) ||
+                        Integer.parseInt(temp) == categories.get(choice-1).items.size()+1)) break;
             }
 
             if(Integer.parseInt(temp) != categories.get(choice-1).items.size()+1) {
-
+                System.out.print("Enter amount you want to add to cart: ");
+                String temp2 = reader.nextLine();
                 while(true){
-                    System.out.print("Enter amount you want to add to cart: ");
-                    String temp2 = reader.nextLine();
-
                     if(Pattern.matches("[1-9]+", temp2) &&  Integer.parseInt(temp2) <= categories.get(choice-1).items.get(Integer.parseInt(temp)-1).getAvailableAmount()){
-                        categories.get(choice-1).items.get(Integer.parseInt(temp)-1).setAvailableAmount(
-                            categories.get(choice-1).items.get(Integer.parseInt(temp)-1).getAvailableAmount()-Integer.parseInt(temp2));
-                        
+                        categories.get(choice-1).items.get(Integer.parseInt(temp)-1).setAvailableAmount(categories.get(choice-1).items.get(Integer.parseInt(temp)-1).getAvailableAmount()-Integer.parseInt(temp2));
                         loggedAccount.addToCart(categories.get(choice-1).items.get(Integer.parseInt(temp)-1), Integer.parseInt(temp2));
                         break;
+                    }else{
+                        System.out.print("OUT OF SCOPE AMOUNT!!/nEnter amount you want to add to cart:");
+                        temp2 = reader.nextLine();
                     }
-                } 
+                }
             }
             displayCategories();
         }
@@ -152,7 +151,6 @@ public class Toffee {
         Register r = new Register();
         Account a = new Account();
         r.createAccount(a);
-
         if(foundedMail(a.getMail()) != -1 && accounts.size() != 0){
             System.out.println("This Mail Is Repeated, Each Mail Has Only One Account. Try Again!");
         }else {
@@ -200,11 +198,11 @@ public class Toffee {
                 int n = reader.nextInt();
                 reader.nextLine();
                 if(n == 1){
-                   String newPass = l.enterPassword();
-                   if(Objects.equals(correctPassword(newPass), accounts.get(ch).getPassword())){
-                       System.out.print(accounts.get(ch).getFName() + " " + accounts.get(ch).getSName());
-                       loggedAccount = accounts.get(ch);
-                       break;
+                    String newPass = l.enterPassword();
+                    if(Objects.equals(correctPassword(newPass), accounts.get(ch).getPassword())){
+                        System.out.print(accounts.get(ch).getFName() + " " + accounts.get(ch).getSName());
+                        loggedAccount = accounts.get(ch);
+                        break;
                     }
                 }else if(n == 2){
                     accounts.get(ch).updatePassword(l.forgetPassword());
@@ -218,7 +216,6 @@ public class Toffee {
             }
         }
         displayCategories();
-
         // reader.close();
     }
 
@@ -229,9 +226,8 @@ public class Toffee {
         int choice = 0;
         do {
             String temp = "";
-            while(!Pattern.matches("[1-4]", temp)){
+            /*while(!Pattern.matches("[1-4]", temp)){
                 System.out.print("\033[H\033[2J");
-
                 if(loggedAccount != null)System.out.print("Logged In as " + loggedAccount.getFName() + " " + loggedAccount.getSName() + " - ");
                 else System.out.print("Not Logged in - ");
                 System.out.println("Please enter what you would like to do from the following: ");
@@ -241,11 +237,18 @@ public class Toffee {
                 System.out.println("(4) Exit");
                 System.out.println();
                 System.out.print("Choice: ");
-                
+
                 temp = reader.nextLine();
 
-            }
-
+            }*/
+            System.out.println("Please enter what you would like to do from the following: ");
+            System.out.println("(1) Register");
+            System.out.println("(2) Login");
+            System.out.println("(3) View Catalogue");
+            System.out.println("(4) Exit");
+            System.out.println();
+            System.out.print("Choice: ");
+            temp = reader.nextLine();
             choice = Integer.parseInt(temp);
 
             switch (choice) {
@@ -279,7 +282,6 @@ public class Toffee {
         }
         return false;
     }
-
     public void sendOTP(Account account){
         System.out.println("\nFrom: " + "system@toffee.com");
         System.out.println("To: " + account.getMail());
@@ -287,11 +289,9 @@ public class Toffee {
         System.out.println("Body: ");
         System.out.println("\nPlease enter this number in the program: " + tempOTP + "\n");
     }
-
     public void displayAccounts(){
         for(int i = 0; i < accounts.size(); i++){
             System.out.println(accounts.get(i));
         }
     }
 }
-
