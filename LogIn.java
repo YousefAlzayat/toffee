@@ -32,6 +32,7 @@ public class LogIn {
                 System.out.print("Please enter another password: ");
                 m = in.nextLine();
             }else{
+                System.out.print("Password Updated Successfully ^^");
                 return m;
             }
         }
