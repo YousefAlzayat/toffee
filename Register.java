@@ -65,7 +65,7 @@ public class Register {
             num = in.next();
         }
         //------------------------------------------------
-        System.out.println("Did you have E-Wallet?\n1. YES.\n2. NO.");
+        System.out.print("Did you have E-Wallet?\n(1) YES.\n(2) NO.\nChoice: ");
         int ch = in.nextInt();
         if(ch == 1){
             System.out.print("Please, Enter E-Wallet Number: ");
@@ -85,7 +85,7 @@ public class Register {
     //=----------------------------------------------------------------------------------------=
 
     public boolean validMail(String Email){
-        if(Pattern.matches("[A-Za-z]+[0-9]*@{1}[a-z]+[.]{1}[a-z]+", Email)){
+        if(Pattern.matches("[a-zA-Z0-9()+-_.;,*&^%$#@!]+@{1}[a-zA-Z]+[.]{1}[a-zA-Z]+", Email)){
             return true;
         }
         System.out.println("Please follow mail guidelines which are:\n" +
