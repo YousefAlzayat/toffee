@@ -1,5 +1,5 @@
-import jdk.jfr.Category;
-import java.util.Objects;
+// import jdk.jfr.Category;
+// import java.util.Objects;
 import java.util.Scanner;
 public class Item {
     private String name;
@@ -31,6 +31,7 @@ public class Item {
     }
 
     private String IconPath;
+
     Scanner in = new Scanner(System.in);
     public void setBrandIcon(){
         System.out.print("Please enter the icon path: ");

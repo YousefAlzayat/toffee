@@ -32,31 +32,80 @@ public class Toffee {
             for (int i = 0; i < categories.size(); i++) {
                 System.out.println("(" + (i+1) + ")" + " " + categories.get(i).getName());
             }
+            System.out.println("(" + (categories.size()+1) + ") Go back");
             if(loggedAccount != null) System.out.println("(" + (categories.size()+2) + ") Display Cart");
-            else System.out.println("(" + (categories.size()+2) + ") Display-Cart");
-            System.out.println("(" + (categories.size()+1) + ") Exit");
             System.out.println();
             System.out.print("Choice: ");
             temp = reader.nextLine();
-            if(Pattern.matches("[1-9]", temp) && Integer.parseInt(temp) <= categories.size()+2) break;
+            if(Pattern.matches("[1-9]+", temp) && (Integer.parseInt(temp) <= categories.size()+1) || (Integer.parseInt(temp) == categories.size()+2 && loggedAccount != null)) break;
         }
 
         int choice = Integer.parseInt(temp);
         
-        if(choice <= categories.size()+1) {
+        if(choice == categories.size()+2){
+            int choice2=-1;
+            while(true){
+                System.out.print("\033[H\033[2J");
+                loggedAccount.viewCart();
+                System.out.println("What do you want to do?");
+                System.out.println("(1) Go back");
+                if(loggedAccount.cartEmpty()) System.out.println("(2) Go to Checkout - Please add items to the cart first");
+                else System.out.println("(2) Go to Checkout");
+                System.out.println();
+                System.out.print("Choice: ");
+                
+                String temp2 = reader.nextLine();
+                if(Pattern.matches("[1-2]", temp2) && (!loggedAccount.cartEmpty() || Pattern.matches("[1]", temp2))){ 
+                    choice2 = Integer.parseInt(temp2);
+                    break;
+                }
+            }
+            
+            if(choice2==2){
+                while(true){
+                    System.out.print("\033[H\033[2J");
+
+                    System.out.println("How would you like to pay for the order?");
+                    System.out.println("(1) Pay on delivery");
+                    System.out.println("(2) Pay with Visa - Coming soon");
+                    System.out.println("(3) Pay with eWallet - Coming soon");
+                    System.out.println();
+                    System.out.print("Choice: ");
+
+                    String temp2 = reader.nextLine();
+                    if(temp2.equals("1")) {
+                        System.out.println("The order will be paid for upon delivery.");
+                        System.out.println("The order will arrive within 3 working days.");
+                        System.out.println("Thank you for shopping at Toffee!");
+                        // exit(0);
+                        break;
+                    }
+                }
+
+                loggedAccount.makeOrder();
+
+                return;
+            }
+
+        }  
+
+        else if(choice <= categories.size()) {
             while(true){
                 System.out.print("\033[H\033[2J");
 
                 categories.get(choice-1).displayItems();
 
                 System.out.println("What would you like to do?");
-                System.out.println("(1" + "-" + categories.get(choice-1).items.size() + ") Add item to cart");
-                System.out.println("  (" + (categories.get(choice-1).items.size()+1) + ") Go back" );
+
+                if(loggedAccount != null)System.out.println("(1" + "-" + categories.get(choice-1).items.size() + ") Add item to cart");
+                else System.out.println("(1" + "-" + categories.get(choice-1).items.size() + ") Add item to cart (Please register or log in)");
+                System.out.println("( " + (categories.get(choice-1).items.size()+1) + " ) Go back" );
                 System.out.println();
                 System.out.print("Choice: ");
 
                 temp = reader.nextLine();
-                if(Pattern.matches("[1-9]", temp) && Integer.parseInt(temp) <= categories.get(choice-1).items.size()+1 && Integer.parseInt(temp) > 0) break;
+                if(Pattern.matches("[1-9]+", temp) && ((loggedAccount != null && Integer.parseInt(temp) < categories.get(choice-1).items.size()+1 && Integer.parseInt(temp) > 0) || 
+                    Integer.parseInt(temp) == categories.get(choice-1).items.size()+1)) break;
             }
 
             if(Integer.parseInt(temp) != categories.get(choice-1).items.size()+1) {
@@ -75,9 +124,10 @@ public class Toffee {
                 } 
             }
             displayCategories();
-
         }
-        else if(choice == categories.size()+2) System.out.println("You chose to display cart");
+        else{
+            return;
+        }
     }
 
     public int foundedMail(String mail){
@@ -172,13 +222,16 @@ public class Toffee {
 
     public void displaySystem() {
         if(loggedAccount == null) System.out.println("    Welcome to Toffee!");
-        else System.out.println("Welcome to Toffee! - Logged In as " + loggedAccount.getFName() + " " + loggedAccount.getSName());
+        else System.out.println("Welcome to Toffee!");
         System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-");
         int choice = 0;
         do {
             String temp = "";
             while(!Pattern.matches("[1-4]", temp)){
+                System.out.print("\033[H\033[2J");
 
+                if(loggedAccount != null)System.out.print("Logged In as " + loggedAccount.getFName() + " " + loggedAccount.getSName() + " - ");
+                else System.out.print("Not Logged in - ");
                 System.out.println("Please enter what you would like to do from the following: ");
                 System.out.println("(1) Register");
                 System.out.println("(2) Login");

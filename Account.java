@@ -10,7 +10,7 @@ public class Account {
     private String mobilePhone;
     private String eWalletNumber;
     private Vector<Order> Orders = new Vector<Order>();
-    private LoyalityPoints credits;
+    // private LoyalityPoints credits;
     private Order cart;
 
     Account(){}
@@ -81,23 +81,37 @@ public class Account {
         return eWalletNumber;
     }
 
-    // public void makeOrder(Order order){
+    public boolean cartEmpty(){
+        if(cart == null) return true;
+        if(cart.orderedItems.size() == 0) return true;
+        return false;
+    }
 
-    // }
-
-    // public void reOrder(int orderId){
-
-    // }
+    public void makeOrder(){
+        cart.state = State.Shipping;
+        Orders.add(cart);
+        cart = null;
+    }
 
     public void displayOrderHistory(){
+        for(Order order : Orders){
+            System.out.println("-----------------------");
+            order.print();
+        }
+        System.out.println("-----------------------");
+    }
+
+    public void viewCart(){
+        if(cart == null) System.out.println("Cart is Empty.");
+        else cart.print();
 
     }
 
     public void addToCart(Item item, int amount){
+        if(amount == 0) return;
         if(cart == null) cart = new Order(this, Orders.size());
 
         cart.addItem(item, amount);
-
     }
 
     public void updatePassword(String newPassword){
