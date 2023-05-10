@@ -12,7 +12,7 @@ public class Order {
     private int orderPrice;
     protected Vector<Item> orderedItems = new Vector<Item>();
     private Vector<Integer> orderedAmounts = new Vector<Integer>();
-    // private Payment payment;
+    protected Payment payment;
     protected State state = State.Pending;
 
     public Order(Account account, int id){

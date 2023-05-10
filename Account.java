@@ -11,7 +11,7 @@ public class Account {
     private String eWalletNumber;
     private Vector<Order> Orders = new Vector<Order>();
     // private LoyalityPoints credits;
-    private Order cart;
+    protected Order cart;
 
     Account(){}
 

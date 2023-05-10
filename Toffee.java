@@ -23,6 +23,51 @@ public class Toffee {
 
     public Toffee(){}
 
+    public void displayCart(){
+        int choice2=-1;
+        while(true){
+            System.out.print("\033[H\033[2J");
+            loggedAccount.viewCart();
+            System.out.println("What do you want to do?");
+            System.out.println("(1) Go back");
+            if(loggedAccount.cartEmpty()) System.out.println("(2) Go to Checkout - Please add items to the cart first");
+            else System.out.println("(2) Go to Checkout");
+            System.out.println();
+            System.out.print("Choice: ");
+
+            String temp2 = reader.nextLine();
+            if(Pattern.matches("[1-2]", temp2) && (!loggedAccount.cartEmpty() || Pattern.matches("[1]", temp2))){
+                choice2 = Integer.parseInt(temp2);
+                break;
+            }
+        }
+
+        if(choice2==2){
+            while(true){
+                System.out.print("\033[H\033[2J");
+
+                System.out.println("How would you like to pay for the order?");
+                System.out.println("(1) Pay on delivery");
+                System.out.println("(2) Pay with Visa - Coming soon");
+                System.out.println("(3) Pay with eWallet - Coming soon");
+                System.out.println();
+                System.out.print("Choice: ");
+
+                String temp2 = reader.nextLine();
+                if(temp2.equals("1")) {
+                    loggedAccount.cart.payment = new CashOnDelivery();
+                    loggedAccount.cart.payment.functionality();
+                    // exit(0);
+                    break;
+                }
+            }
+
+            loggedAccount.makeOrder();
+
+            return;
+        }
+    }
+
     public void displayCategories(){
         String temp = "";
         while(true){
@@ -42,53 +87,8 @@ public class Toffee {
 
         int choice = Integer.parseInt(temp);
 
-        if(choice == categories.size()+2){
-            int choice2=-1;
-            while(true){
-                System.out.print("\033[H\033[2J");
-                loggedAccount.viewCart();
-                System.out.println("What do you want to do?");
-                System.out.println("(1) Go back");
-                if(loggedAccount.cartEmpty()) System.out.println("(2) Go to Checkout - Please add items to the cart first");
-                else System.out.println("(2) Go to Checkout");
-                System.out.println();
-                System.out.print("Choice: ");
-
-                String temp2 = reader.nextLine();
-                if(Pattern.matches("[1-2]", temp2) && (!loggedAccount.cartEmpty() || Pattern.matches("[1]", temp2))){
-                    choice2 = Integer.parseInt(temp2);
-                    break;
-                }
-            }
-
-            if(choice2==2){
-                while(true){
-                    System.out.print("\033[H\033[2J");
-
-                    System.out.println("How would you like to pay for the order?");
-                    System.out.println("(1) Pay on delivery");
-                    System.out.println("(2) Pay with Visa - Coming soon");
-                    System.out.println("(3) Pay with eWallet - Coming soon");
-                    System.out.println();
-                    System.out.print("Choice: ");
-
-                    String temp2 = reader.nextLine();
-                    if(temp2.equals("1")) {
-                        System.out.println("The order will be paid for upon delivery.");
-                        System.out.println("The order will arrive within 3 working days.");
-                        System.out.println("Thank you for shopping at Toffee!");
-                        // exit(0);
-                        break;
-                    }
-                }
-
-                loggedAccount.makeOrder();
-
-                return;
-            }
-
-        }
-
+        if(choice == categories.size()+2)  displayCart();
+        
         else if(choice <= categories.size()) {
             while(true){
                 System.out.print("\033[H\033[2J");
