@@ -77,11 +77,13 @@ public class Toffee {
             for (int i = 0; i < categories.size(); i++) {
                 System.out.println("(" + (i+1) + ")" + " " + categories.get(i).getName());
             }
-            System.out.println("(" + (categories.size()+1) + ") Go back");
+            if(loggedAccount != null) System.out.println("(" + (categories.size()+1) + ") Log Out");
+            else System.out.println("(" + (categories.size()+1) + ") Go Back");
             if(loggedAccount != null) System.out.println("(" + (categories.size()+2) + ") Display Cart");
             System.out.println();
             System.out.print("Choice: ");
             temp = reader.nextLine();
+            if(Pattern.matches("[1-9]+", temp) && (Integer.parseInt(temp) == categories.size()+1) && loggedAccount != null) loggedAccount = null;
             if(Pattern.matches("[1-9]+", temp) && (Integer.parseInt(temp) <= categories.size()+1) || (Integer.parseInt(temp) == categories.size()+2 && loggedAccount != null)) break;
         }
 
@@ -99,8 +101,7 @@ public class Toffee {
 
                 if(loggedAccount != null)System.out.println("(1" + "-" + categories.get(choice-1).items.size() + ") Add item to cart");
                 else System.out.println("(1" + "-" + categories.get(choice-1).items.size() + ") Add item to cart (Please register or log in)");
-                System.out.println("( " + (categories.get(choice-1).items.size()+1) + " ) Go back" );
-                System.out.println();
+                System.out.println("( " + (categories.get(choice-1).items.size()+1) + " ) Go back\n");
                 System.out.print("Choice: ");
 
                 temp = reader.nextLine();
@@ -154,11 +155,29 @@ public class Toffee {
         if(foundedMail(a.getMail()) != -1 && accounts.size() != 0){
             System.out.println("This Mail Is Repeated, Each Mail Has Only One Account. Try Again!");
         }else {
+            System.out.println("Please wait...");
+            createOTP();
+            sendOTP(a);
+
+            while(true){
+
+                System.out.println("An OTP has been sent to your email, please enter the OTP\n");
+                System.out.print("OTP: ");
+
+                String nput;
+                nput = reader.nextLine();
+
+                if(correctOTP(nput)) break;
+                else{
+                    System.out.println("\nThe OTP you entered is incorrect. Please try again\n\n");
+                }
+               
+            }
+
             System.out.println("Successfully Created Account.");
             accounts.add(a);
             loggedAccount = a;
             System.out.println(a.getFName() + " " + a.getSName());
-//                 System.out.println(a.getLoyalityPoints());
             displayCategories();
         }
     }
@@ -171,8 +190,7 @@ public class Toffee {
             System.out.println("Invalid Mail.");
             ch = foundedMail(l.enterMail());
             if(ch == -1){
-                System.out.println("Did you want to register instead of logIn?\n1. YES.\n2. NO.");
-                System.out.println();
+                System.out.println("Did you want to register instead of logIn?\n1. YES.\n2. NO.\n");
                 System.out.println("Choice: ");
                 int d = reader.nextInt();
                 reader.nextLine();
@@ -186,11 +204,8 @@ public class Toffee {
             System.out.println("\033[H\033[2J");
             System.out.println("Valid Info ^^");
             System.out.print("Welcome back ya ");
-            System.out.print(accounts.get(ch).getFName() + " " + accounts.get(ch).getSName());
-            System.out.println("!");
+            System.out.println(accounts.get(ch).getFName() + " " + accounts.get(ch).getSName() + "!");
             loggedAccount = accounts.get(ch);
-//                        System.out.println(accounts.get(ch).getLoyalityPoints());
-            // displayCategories();
         }else{
             while(true){
                 System.out.println("This is wrong password for this mail");
@@ -205,6 +220,27 @@ public class Toffee {
                         break;
                     }
                 }else if(n == 2){
+                    System.out.println("Please wait...");
+                    createOTP();
+                    sendOTP(accounts.get(ch));
+
+                    while(true){
+
+                        System.out.println("An OTP has been sent to your email, please enter the OTP");
+                        System.out.println();
+                        System.out.print("OTP: ");
+
+                        String nput;
+                        nput = reader.nextLine();
+
+                        if(correctOTP(nput)) break;
+                        else{
+                            System.out.println();
+                            System.out.println("The OTP you entered is incorrect. Please try again");
+                            System.out.println();
+                            System.out.println();
+                        }
+                    }
                     accounts.get(ch).updatePassword(l.forgetPassword());
                     System.out.println("Valid Info ^^");
                     System.out.println(accounts.get(ch).getFName() + " " + accounts.get(ch).getSName());
@@ -226,21 +262,6 @@ public class Toffee {
         int choice = 0;
         do {
             String temp = "";
-            /*while(!Pattern.matches("[1-4]", temp)){
-                System.out.print("\033[H\033[2J");
-                if(loggedAccount != null)System.out.print("Logged In as " + loggedAccount.getFName() + " " + loggedAccount.getSName() + " - ");
-                else System.out.print("Not Logged in - ");
-                System.out.println("Please enter what you would like to do from the following: ");
-                System.out.println("(1) Register");
-                System.out.println("(2) Login");
-                System.out.println("(3) View Catalogue");
-                System.out.println("(4) Exit");
-                System.out.println();
-                System.out.print("Choice: ");
-
-                temp = reader.nextLine();
-
-            }*/
             System.out.println("Please enter what you would like to do from the following: ");
             System.out.println("(1) Register");
             System.out.println("(2) Login");
@@ -264,8 +285,6 @@ public class Toffee {
                 }
             }
         } while (true);
-
-
     }
 
     public String createOTP(){
@@ -276,7 +295,7 @@ public class Toffee {
     }
 
     public boolean correctOTP(String s){
-        if(s == tempOTP) {
+        if(s.equals(tempOTP)) {
             tempOTP = "";
             return true;
         }
