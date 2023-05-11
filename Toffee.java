@@ -282,13 +282,12 @@ public class Toffee {
         }
         return false;
     }
+    
     public void sendOTP(Account account){
-        System.out.println("\nFrom: " + "system@toffee.com");
-        System.out.println("To: " + account.getMail());
-        System.out.println("Subject: " + "OTP Request");
-        System.out.println("Body: ");
-        System.out.println("\nPlease enter this number in the program: " + tempOTP + "\n");
+        SendEmail mailer = new SendEmail();
+        mailer.send(account.getMail(), tempOTP);
     }
+
     public void displayAccounts(){
         for(int i = 0; i < accounts.size(); i++){
             System.out.println(accounts.get(i));

@@ -1,9 +1,8 @@
 public class app{
 
-    public static void main(String[] args){
+    static Toffee application = new Toffee();
 
-        // System.out.println("Hello World");
-        Toffee application = new Toffee();
+    public void buildApp(){
         Item voucher1 = new Item("Voucher1", 5, "Description", 5, "TOFFEE", "", "Vouchers");
         Item voucher2 = new Item("Voucher2", 10, "Description", 5, "TOFFEE", "", "Vouchers");
         Item voucher3 = new Item("Voucher3", 25, "Description", 5, "TOFFEE", "", "Vouchers");
@@ -34,11 +33,15 @@ public class app{
         cat3.addNewItem(marshmellow3);
         cat3.addNewItem(marshmellow4);
 
-        application.accounts.add(new Account("yousef", "ahmed", "1", "2", "36 HIH", "01002684347", ""));
+        application.accounts.add(new Account("yousef", "ahmed", "yousefalzayat02@yahoo.com", "2", "36 HIH", "01002684347", ""));
 
         application.categories.add(cat1);
         application.categories.add(cat2);
         application.categories.add(cat3);
+    }
+    
+    public static void main(String[] args){
+        
         application.displaySystem();
         // System.out.println("<OTP> 1234");
     }
