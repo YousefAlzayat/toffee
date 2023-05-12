@@ -3,6 +3,7 @@ import java.util.regex.*;
 
 public class Register {
     Scanner in = new Scanner(System.in);
+
     public void createAccount(Account a){
         System.out.print("Please enter your first name: ");
 //        a.setFName(in.next());
@@ -78,6 +79,7 @@ public class Register {
         return false;
     }
     //----------------------------------------------------------------------------------------
+    
     public boolean checkPasswordGuidelines(String s){
         if(Pattern.matches("(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@#!+^%$&*.<>;{})(]).{8,}", s)){
             return true;
@@ -89,6 +91,7 @@ public class Register {
         return false;
     }
     //----------------------------------------------------------------------------------------
+    
     public boolean checkTelephoneNumberGuidelines(String num){
         if(Pattern.matches("(01)?[0-9]{9}", num)){
             return true;
@@ -97,6 +100,7 @@ public class Register {
         return false;
     }
     //----------------------------------------------------------------------------------------
+    
     public boolean stringValidation(String word){
         if(Pattern.matches("[A-Za-z]+", word)){
             return true;
@@ -105,6 +109,7 @@ public class Register {
         return false;
     }
     //-----------------------------------------------------------------------------------------
+    
     public boolean EWalletValidation(String word){
         if(Pattern.matches("[0-9]{11}", word)){
             return true;
