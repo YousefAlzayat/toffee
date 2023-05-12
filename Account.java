@@ -8,21 +8,18 @@ public class Account {
     private String password;
     private String address;
     private String mobilePhone;
-    private String eWalletNumber;
     private Vector<Order> Orders = new Vector<Order>();
-    // private LoyalityPoints credits;
     protected Order cart;
 
     Account(){}
 
-    Account(String firstName, String secondName, String mail, String password, String address, String mobilePhone, String eWalletNumber){
+    Account(String firstName, String secondName, String mail, String password, String address, String mobilePhone){
         this.firstName = firstName;
         this.secondName = secondName;
         this.mail = mail;
         this.password = password;
         this.address = address;
         this.mobilePhone = mobilePhone;
-        this.eWalletNumber = eWalletNumber;
     }
 
     public void setFName(String firstName){
@@ -71,14 +68,6 @@ public class Account {
 
     public String getMobilePhone(){
         return mobilePhone;
-    }
-
-    public void setEWalletNum(String eWalletNumber){
-        this.eWalletNumber = eWalletNumber;
-    }
-
-    public String getEWalletNum(){
-        return eWalletNumber;
     }
 
     public boolean cartEmpty(){

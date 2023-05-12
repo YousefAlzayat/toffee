@@ -33,7 +33,7 @@ public class app{
         cat3.addNewItem(marshmellow3);
         cat3.addNewItem(marshmellow4);
 
-        application.accounts.add(new Account("yousef", "ahmed", "1", "2", "36 HIH", "01002684347", ""));
+        application.accounts.add(new Account("Yousef", "Ahmed", "1", "2", "36 HIH", "01002684347"));
 
         application.categories.add(cat1);
         application.categories.add(cat2);
@@ -42,12 +42,15 @@ public class app{
     
     public static void main(String[] args){
         
+        // TEMP ACCOUNT ALREADY CREATED,
+        // Email: 1
+        // Passw: 2
 
         buildApp();
         application.displaySystem();
 
         // SendEmail test = new SendEmail();
-        // test.send("yousefalzayat02@yahoo.com", "4567");
+        // test.send("yousefalzayat02@yahoo.com", "1234");
 
     }
 

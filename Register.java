@@ -64,23 +64,6 @@ public class Register {
             System.out.print("Please enter correct number: ");
             num = in.next();
         }
-        //------------------------------------------------
-        System.out.print("Did you have E-Wallet?\n(1) YES.\n(2) NO.\nChoice: ");
-        int ch = in.nextInt();
-        if(ch == 1){
-            System.out.print("Please, Enter E-Wallet Number: ");
-            String ewallet = in.next();
-            while(true){
-                if(EWalletValidation(ewallet)){
-                    a.setEWalletNum(ewallet);
-                    break;
-                }
-                System.out.println("Please, Enter Correct E-Wallet Number: ");
-                ewallet = in.next();
-            }
-        }else{
-            a.setEWalletNum("0");
-        }
     }
     //=----------------------------------------------------------------------------------------=
 

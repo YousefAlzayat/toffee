@@ -8,11 +8,8 @@ public abstract class Payment {
 
     public void reducePriceByVouchers(){}
 
-    public void confirmOperationByOTP(){
-
-    }
+    public void confirmOperationByOTP(){}
 
     abstract void functionality();
-
 
 }

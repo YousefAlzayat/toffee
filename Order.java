@@ -7,7 +7,6 @@ enum State {
 public class Order {
     
     private int id;
-    // private String date;
     private Account account;
     private int orderPrice;
     protected Vector<Item> orderedItems = new Vector<Item>();
@@ -41,8 +40,10 @@ public class Order {
 
         System.out.println("Total Price: $" + orderPrice);
         System.out.println("Order Items: ");
+        
         for (int i = 0; i < orderedItems.size(); i++) {
-            System.out.println("x" + orderedAmounts.get(i) + "   " + orderedItems.get(i).getName() + "   $" + (orderedAmounts.get(i)*orderedItems.get(i).getPrice()));
+            System.out.print("x" + orderedAmounts.get(i) + "   ");
+            System.out.println(orderedItems.get(i).getName() + "   $" + (orderedAmounts.get(i)*orderedItems.get(i).getPrice()));
         }
 
     }
