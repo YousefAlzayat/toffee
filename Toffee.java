@@ -23,7 +23,8 @@ public class Toffee {
     public void displayCart(){
         int choice2=-1;
         while(true){
-            System.out.print("\033[H\033[2J");
+            //System.out.print("\033[H\033[2J");
+
             loggedAccount.viewCart();
             System.out.println("What do you want to do?");
             System.out.println("(1) Go back");
@@ -41,7 +42,8 @@ public class Toffee {
 
         if(choice2==2){
             while(true){
-                System.out.print("\033[H\033[2J");
+                //System.out.print("\033[H\033[2J");
+
 
                 System.out.println("How would you like to pay for the order?");
                 System.out.println("(1) Pay on delivery");
@@ -71,7 +73,8 @@ public class Toffee {
         // OFFER CATEGORY EXPLORATION OPTIONS
         while(true){
 
-            System.out.print("\033[H\033[2J");
+            //System.out.print("\033[H\033[2J");
+
             System.out.println("Please enter the category you would like to explore of the following: ");
 
             for (int i = 0; i < categories.size(); i++) {
@@ -109,7 +112,8 @@ public class Toffee {
 
             while(true){
 
-                System.out.print("\033[H\033[2J");
+                //System.out.print("\033[H\033[2J");
+
 
                 categories.get(choice-1).displayItems();
 
