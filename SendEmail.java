@@ -23,7 +23,7 @@ public class SendEmail
       
       Authenticator auth = new Authenticator() {
          protected PasswordAuthentication getPasswordAuthentication(){
-            return new PasswordAuthentication("yousefalzayat02@gmail.com", "PAssword12!");
+            return new PasswordAuthentication("yousefalzayat02@gmail.com", "eabcsdlwitkgmakz");
          }
       };
 
