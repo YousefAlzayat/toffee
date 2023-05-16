@@ -11,7 +11,7 @@ public class SendEmail
    public void send(String recipient, String OTP)
    {   
       // email ID of  Sender.
-      String sender = EMAIL;
+      String EMAIL = "personalEmail@gmail.com";
 
       // Getting system properties
       Properties properties = new Properties();
@@ -23,7 +23,7 @@ public class SendEmail
       
       Authenticator auth = new Authenticator() {
          protected PasswordAuthentication getPasswordAuthentication(){
-            return new PasswordAuthentication(EMAIL, PASSWORD);
+            return new PasswordAuthentication(EMAIL, "123123Password");
          }
       };
 
